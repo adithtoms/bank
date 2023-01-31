@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background: rgba(0,0,0, 0.5)url("./assets/bnk.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: darken;
+
+   
+}
+header{
+    padding: 10px;
+    color: aliceblue;
+    font-size: 28px;
+    font-weight: 800;
+    background-color: rgb(16, 16, 181);
+}
+footer{
+    padding: 10px;
+    color: aliceblue;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 200;
+    background-color: rgb(16, 16, 181);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+   
+}
