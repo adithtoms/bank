@@ -3,8 +3,9 @@
 
 <div class="container w-25 p-5 border border-secondary rounded bg-light mt-5">
     <form action="">
-        <input #acno type="text" [placeholder]="inputplaceholder" class="form-control mb-4" id="acid" name="acnum1">
-        <input #psw type="password" placeholder="password" class="form-control mb-4" id="psw1" name="paswrd1">
-        <button class="btn btn-primary" type="button" (click)="login(acno,psw)">Login</button>
+        <input [(ngModel)]="acno" type="text" [placeholder]="inputplaceholder" class="form-control mb-4" id="acid" name="acnum1">
+        <input [(ngModel)]="pass" type="password" placeholder="password" class="form-control mb-4" id="psw1" name="paswrd1">
+        <button class="btn btn-primary text-center" type="button" (click)="login()">Login</button>
     </form>
+    <div class="text-center">Not registred? <a routerLink="register">Register</a> </div>
 </div>
