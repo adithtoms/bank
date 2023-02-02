@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   pass = '';
 
 
-  constructor(private router:Router,private ds:DataService) { }
+  constructor(private router: Router, private ds: DataService) { }
 
   ngOnInit(): void {
 
@@ -26,23 +26,20 @@ export class LoginComponent implements OnInit {
   login() {
     var acnum = this.acno
     var psw = this.pass
-    var userDetails = this.ds.userDetails
 
-    if (acnum in userDetails) {
-      if (psw == userDetails[acnum]["password"]) {
-        alert("login success")
-        this.router.navigateByUrl('dashboard')
-      } else {
-        alert("incorrect password")
-      }
+
+    const result = this.ds.login(acnum, psw)
+    if (result) {
+      alert("login success")
+      this.router.navigateByUrl("dashboard")
     } else {
-      alert("acnym incorrect")
+      alert("incorrect username or password ")
     }
 
-    //alert('welocome user')
+
   }
 
-  
- 
+
+
 
 }
