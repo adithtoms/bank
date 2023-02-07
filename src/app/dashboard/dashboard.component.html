@@ -1,1 +1,23 @@
 <h1>Welcome <span>{{user}}</span> </h1>
+<div class="container row text-center p-5 w-100">
+    <div class="container col-lg-6 col-md-12 w-50 border boder-dark text-center bg-light p-4 rounded">
+        <h1>Deposit</h1>
+        <form action="" (ngSubmit)="deposit()">
+            <input [(ngModel)]="acnum1" type="text" class="form-control mb-3 p-2" placeholder="Account Number" id="acnm1" name="accn1">
+            <input [(ngModel)]="pass1" type="password" class="form-control mb-3 p-2" placeholder="Password" id="pas1" name="psw1">
+            <input [(ngModel)]="amnt1" type="text" class="form-control mb-3 p-2" placeholder="Amount" id="ant1" name="amn1">
+            <button type="submit" class="btn btn-outline-primary">Deposit</button>
+        
+        </form ></div>
+
+    <div class="container col-lg-6 col-md-12 w-50 border boder-dark text-center bg-light p-4 rounded">
+        <h1>Withdraw</h1>
+        <form action="" (ngSubmit)="withdraw()" >
+            <input [(ngModel)]="acnum2" type="text" class="form-control mb-3 p-2" placeholder="Account Number" id="acnm2" name="accn2">
+            <input [(ngModel)]="pass2" type="password" class="form-control mb-3 p-2" placeholder="Password" id="pas2" name="psw2">
+            <input [(ngModel)]="amnt2" type="text" class="form-control mb-3 p-2" placeholder="Amount" id="ant2" name="amn2">
+            <button type="submit"  class="btn btn-outline-primary">Withdraw</button>
+        
+        </form></div>
+    <button type="button" class="btn btn-secondary mt-4"><a style="text-decoration: none; color: #000;" routerLink="/transaction">Show Transaction</a></button>
+</div>
