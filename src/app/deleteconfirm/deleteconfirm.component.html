@@ -1,0 +1,7 @@
+<div *ngIf="item" class="container w-25 rounded text-center p-5 mt-2" style="background-color: thistle;">
+    <h3>Are you Sure?</h3>
+    <h6 class="text-danger">Do you want to delete your bank account? {{item}}</h6>
+    <button class="btn btn-danger ">Yes</button>
+    <button class="btn btn-primary ms-2" (click)="onCancel()">No</button>
+
+</div>  

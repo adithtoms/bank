@@ -9,8 +9,10 @@ import { DataService } from '../services/data.service';
 export class TransactionComponent implements OnInit {
 
   transactionData:any
+  user:any
 
   constructor(private ds:DataService){
+    this.user = this.ds.currenUser
     
 this.transactionData=this.ds.getTransaction(this.ds.currentAcno)
 console.log(this.transactionData);

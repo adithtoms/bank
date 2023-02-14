@@ -1,4 +1,5 @@
 import { Component , OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -9,24 +10,31 @@ import { DataService } from '../services/data.service';
 })
 export class RegisterComponent implements OnInit {
 
-  acno = '';
-  psw = '';
-  uname = '';
 
-  constructor(private ds:DataService,private router:Router){ }
+  constructor(private ds:DataService,private router:Router,private fb:FormBuilder){}
+
+  //create reactive form of register form
+
+  registerForm=this.fb.group({
+    acno:['',[Validators.required,Validators.pattern('[0-9]+')]],
+    uname:['',[Validators.required,Validators.pattern('[a-zA-Z]+')]],
+    psw:['',[Validators.required,Validators.pattern('[0-9a-zA-Z]+')]]
+  })
 
   ngOnInit(): void {
 
   }
 
   register(){
-    var accnum= this.acno
-    var password=this.psw
-    var user =this.uname
+    var accnum= this.registerForm.value.acno
+    var password=this.registerForm.value.psw
+    var user =this.registerForm.value.uname
 
     // console.log(accnum,password,user);
 
-    const result=this.ds.register(user,accnum,password);
+    if(this.registerForm.valid){
+
+    const result=this.ds.register(accnum,user,password);
 
     if(result){
       alert("user details registered")
@@ -35,8 +43,10 @@ export class RegisterComponent implements OnInit {
       alert("user already exists")
     }
     
+  } else{
+    alert("invalid form")
   }
 
 
-
+  }
 }
