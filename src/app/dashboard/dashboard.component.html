@@ -3,7 +3,7 @@
     <h2 class="text-danger">{{date | date:'short'}}</h2>
 </div>
 <h1>Welcome <span>{{user}}</span> </h1>
-<app-deleteconfirm (cancel)="cancel()" [item]="acno"></app-deleteconfirm>
+<app-deleteconfirm (onDelete)="Delete($event)" (cancel)="cancel()" [item]="acno"></app-deleteconfirm>
 
 <div  [ngClass]="acno?'style':''" class="container row text-center p-5 w-100">
     

@@ -13,6 +13,8 @@ export class DeleteconfirmComponent implements OnInit{
 
   @Output()  cancel=new EventEmitter()
 
+  @Output() onDelete= new EventEmitter()
+
   constructor(){}
   ngOnInit(): void {
     
@@ -20,6 +22,11 @@ export class DeleteconfirmComponent implements OnInit{
 
   onCancel(){
 this.cancel.emit()
+  }
+
+  deleteAcc(){
+    //start event
+    this.onDelete.emit(this.item)
   }
 
 }

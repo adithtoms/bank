@@ -11,14 +11,18 @@ import { DataService } from '../services/data.service';
 export class DashboardComponent implements OnInit {
 
   user: any
-  acno:any
-  date:any
+  acno: any
+  date: any
 
 
 
-  constructor(private ds: DataService, private fb: FormBuilder,private route:Router) {
-    this.user = this.ds.currenUser
-    this.date=new Date()
+  constructor(private ds: DataService, private fb: FormBuilder, private route: Router) {
+    if (localStorage.getItem("currentUser")) {
+      this.user = JSON.parse(localStorage.getItem("currentUser") || "")
+      console.log(this.user);
+    }
+
+    this.date = new Date()
   }
 
   depositForm = this.fb.group({
@@ -34,7 +38,7 @@ export class DashboardComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    if(!localStorage.getItem("currentAcno")){
+    if (!localStorage.getItem("token")) {
       alert('please login')
       this.route.navigateByUrl("")
     }
@@ -46,14 +50,17 @@ export class DashboardComponent implements OnInit {
     var amount = this.depositForm.value.amnt1;
 
 
-    const result = this.ds.deposit(accnum, password, amount)
+
     if (this.depositForm.valid) {
-      if (result) {
-        alert(`your account is credited with ${amount}  and balance is ${result}`)
-      } else {
-        alert("Incorrect Accountnumber or password")
-      }
-    } else {
+      this.ds.deposit(accnum, password, amount).subscribe((result: any) => {
+        alert(result.message)
+      },
+        (result: { error: { message: any; }; }) => {
+          alert(result.error.message)
+        }
+      )
+    }
+    else {
       alert("invalid form")
     }
 
@@ -65,15 +72,14 @@ export class DashboardComponent implements OnInit {
     var amount = this.withdrawForm.value.amnt2;
 
 
-    const result = this.ds.withdraw(accnum, password, amount)
+
     if (this.withdrawForm.valid) {
-      if (result) {
-        alert(`your account is debited with ${amount} and balance is ${result}`)
-
-      } else {
-        alert("Incorrect Accountnumber or password")
-
-      }
+      this.ds.withdraw(accnum, password, amount).subscribe((result: any) => {
+        alert(result.message)
+      },
+        (result: { error: { message: any; }; }) => {
+          alert(result.error.message)
+        })
     } else {
       alert("Invalid form")
     }
@@ -81,20 +87,30 @@ export class DashboardComponent implements OnInit {
   }
 
   logout() {
-    alert("click ok to lougout")
+    alert("click ok to logout")
     localStorage.removeItem('currentUser')
     localStorage.removeItem('currentAcno')
+    localStorage.removeItem('token')
     this.route.navigateByUrl("")
-    
+
   }
 
-  deleteParent(){
-this.acno=JSON.parse(localStorage.getItem("currentAcno")|| "")
-  
+  deleteParent() {
+    this.acno = JSON.parse(localStorage.getItem("currentAcno") || "")
+
   }
 
-  cancel(){
-    this.acno=''
+  cancel() {
+    this.acno = ''
+  }
+
+  Delete(event: any) {
+    // alert(event)
+
+    this.ds.deleacc(event).subscribe((result: any) => {
+      alert(result.message)
+      this.logout()
+    })
   }
 
 }

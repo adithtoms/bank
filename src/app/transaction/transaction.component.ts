@@ -9,13 +9,17 @@ import { DataService } from '../services/data.service';
 export class TransactionComponent implements OnInit {
 
   transactionData:any
-  user:any
+ user:any
 
   constructor(private ds:DataService){
-    this.user = this.ds.currenUser
+   this.user = JSON.parse(localStorage.getItem("currentUser")||"")
+    const acno = JSON.parse(localStorage.getItem("currentAcno")||"")
     
-this.transactionData=this.ds.getTransaction(this.ds.currentAcno)
-console.log(this.transactionData);
+this.ds.getTransaction(acno).subscribe((result:any)=>{
+  this.transactionData=result.transaction
+
+})
+// console.log(this.transactionData);
 
   }
 

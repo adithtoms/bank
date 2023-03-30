@@ -34,14 +34,17 @@ export class RegisterComponent implements OnInit {
 
     if(this.registerForm.valid){
 
-    const result=this.ds.register(accnum,user,password);
-
-    if(result){
-      alert("user details registered")
-      this.router.navigateByUrl('')
-    } else{
-      alert("user already exists")
+    this.ds.register(accnum,user,password).subscribe((result:any)=>{
+      alert(result.message)
+      this.router.navigateByUrl("")
+    },
+    result=>{
+      alert(result.error.message)
+      this.router.navigateByUrl("")
     }
+    );
+
+   
     
   } else{
     alert("invalid form")
